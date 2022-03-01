@@ -1,0 +1,86 @@
+@charset "UTF-8";
+* {
+  font-family: 微軟正黑體;
+}
+
+body {
+  padding: 30px;
+}
+
+.bkl_icon {
+  width: 80px;
+}
+
+.book {
+  border: solid 1px #555;
+  width: 180px;
+  padding: 10px;
+  display: inline-block;
+  text-align: center;
+  vertical-align: top;
+}
+.book img {
+  width: 100%;
+}
+.book h2 {
+  font-size: 16px;
+}
+.book h2 {
+  margin-bottom: 0;
+  height: 43px;
+}
+.book h2 a {
+  color: #333333;
+  text-decoration: none;
+}
+.book h4 {
+  font-weight: normal;
+  margin: 0;
+  font-size: 15px;
+  color: #666666;
+}
+.book h4 a {
+  color: #666666;
+  text-decoration: none;
+}
+.book .red {
+  color: #D0021B;
+  font-weight: bold;
+}
+
+.big {
+  width: 220px;
+}
+
+.detail {
+  display: block;
+  width: 100%;
+  text-align: left;
+}
+.detail img {
+  width: 150px;
+  display: inline-block;
+  vertical-align: middle;
+}
+.detail .infos {
+  display: inline-block;
+  width: calc(100% - 150px - 20px);
+  vertical-align: middle;
+  line-height: 25px;
+}
+.detail .infos h2 {
+  height: initial;
+  font-size: 20px;
+  margin-top: 5px;
+}
+
+.detail.big {
+  height: initial;
+  padding: 15px;
+}
+.detail.big img {
+  width: 220px;
+}
+.detail.big .infos {
+  width: calc(100% - 220px - 40px);
+}

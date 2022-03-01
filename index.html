@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - Vue.js 博客來實作 - v-if/v-show 條件渲染與資料的後處理</title>
+  <link rel="stylesheet" href="./style.css">
+
+</head>
+
+<body>
+  <!-- partial:index.partial.html -->
+  <!-- 在2.0以後的版本裡面，{{}}只能寫在文本中，例如：<h1>{{data}}<h1>如果要綁定在屬性裡面的話，一律要使用v-bind。例如：v-bind:class="", v-bind:src="url"所有屬性都可以透過v-bind來綁定，另外，v-bind的簡寫為:所以你這邊在也可以寫成#app(:class="mode_detail?'detail':''")-->
+  <div id="app">
+    <h1>使用 Vue.js 計算呈現資訊 /v-if</h1>
+    <h3>實戰博客來排行榜資料轉換 html <span><img class="bkl_icon"
+          src="https://cdn.shortpixel.ai/spai/w_798+q_lossless+ret_img+to_webp/https://readingoutpost.com/wp-content/uploads/2021/04/books-logo-trans.png"
+          alt="" /><a href="https://www.books.com.tw/web/sys_saletopb/books" target="_blank">（連結網址）</a></span></h3>
+    <br />
+    <label>詳細模式
+      <input type="checkbox" v-model="mode_detail" />
+      <!-- 需要有一個資料跟 checkbox 連結起來，知道他的狀態 因此連結 mode_detail(vue.js下面命名) 若打勾，mode_detail就從 false 變成 true-->
+    </label>
+    <label>優惠價</label><span v-for="(book,id) in books">
+      <!-- Vue2 中對於 v-for 的使用方法有點不一樣，第一個引數已不再是每個資料的 index 了，而是陣列中每筆資料 所以要將 id 放在後面（順序和過去不同）-->
+      <label>{{id+1}}
+        <input type="checkbox" v-model="book.is_discount" />
+      </label>
+    </span>
+    <label>小呈現
+      <input type="radio" v-model="mode_size" value="small" />
+    </label>
+    <label>大呈現
+      <input type="radio" v-model="mode_size" value="big" />
+    </label><br />
+    <div class="book" v-for="book in books" v-bind:class="[mode_detail?'detail':'',mode_size]">
+      <!--此行說明：js中的mode_detail是true嗎？如果是true，在class加上'detail' 若沒有 則不加入，可用來控制css呈現方式--><img v-bind:src="book.img"
+        alt="" />
+      <div class="infos">
+        <h2 v-if="!mode_detail"><a href="{{book.link_book}}" target="_blank">{{book.name.substring(0,20)}}</a></h2>
+        <h2 v-if="mode_detail"><a href="{{book.link_book}}" target="_blank">{{book.name}}</a></h2>
+        <h4>作者：<a href="{{book.link_author}}">{{book.author}}</a></h4>
+        <h4 v-if="mode_detail">出版社：{{book.publish_house}}</h4>
+        <h4 v-if="book.is_discount">優惠價：<span class="red">{{book.discount*100}}</span><span>折</span><span
+            class="red">{{Math.round(book.price*book.discount)}}</span><span>元</span></h4>
+        <h4 v-if="!book.is_discount">價錢：<span class="red">{{book.price}}</span><span>元</span></h4>
+        <h4 v-if="mode_detail">出版日期：{{book.date}}</h4>
+      </div>
+    </div>
+  </div>
+  <!-- partial -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.min.js'></script>
+  <script src="./script.js"></script>
+
+</body>
+
+</html>
